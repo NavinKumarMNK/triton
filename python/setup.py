@@ -211,7 +211,7 @@ def download_and_copy(src_path, variable, version, url_func):
         return
     base_dir = os.path.dirname(__file__)
     system = platform.system()
-    arch = {"x86_64": "64", "arm64": "aarch64", "aarch64": "aarch64"}[platform.machine()]
+    arch = {"x86_64": "64", "arm64": "aarch64", "aarch64": "aarch64", "ppc64le":"ppc64le"}[platform.machine()]
     url = url_func(arch, version)
     tmp_path = os.path.join(triton_cache_path, "nvidia")  # path to cache the download
     dst_path = os.path.join(base_dir, os.pardir, "third_party", "nvidia", "backend", src_path)  # final binary path
@@ -375,21 +375,21 @@ download_and_copy(
     variable="TRITON_PTXAS_PATH",
     version="12.4.99",
     url_func=lambda arch, version:
-    f"https://anaconda.org/nvidia/cuda-nvcc/{version}/download/linux-{arch}/cuda-nvcc-{version}-0.tar.bz2",
+    f"https://anaconda.org/nvidia/cuda-nvcc/{version}/download/linux-ppc64le/cuda-nvcc-{version}-0.tar.bz2",
 )
 download_and_copy(
     src_path="bin/cuobjdump",
     variable="TRITON_CUOBJDUMP_PATH",
     version="12.4.99",
     url_func=lambda arch, version:
-    f"https://anaconda.org/nvidia/cuda-cuobjdump/{version}/download/linux-{arch}/cuda-cuobjdump-{version}-0.tar.bz2",
+    f"https://anaconda.org/nvidia/cuda-cuobjdump/{version}/download/linux-ppc64le/cuda-cuobjdump-{version}-0.tar.bz2",
 )
 download_and_copy(
     src_path="bin/nvdisasm",
     variable="TRITON_NVDISASM_PATH",
     version="12.4.99",
     url_func=lambda arch, version:
-    f"https://anaconda.org/nvidia/cuda-nvdisasm/{version}/download/linux-{arch}/cuda-nvdisasm-{version}-0.tar.bz2",
+    f"https://anaconda.org/nvidia/cuda-nvdisasm/{version}/download/linux-ppc64le/cuda-nvdisasm-{version}-0.tar.bz2",
 )
 
 backends = [*BackendInstaller.copy(["nvidia", "amd"]), *BackendInstaller.copy_externals()]
